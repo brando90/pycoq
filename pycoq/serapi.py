@@ -2,6 +2,7 @@
 functions to work with coq-serapi
 '''
 import logging
+import os
 import re
 import json
 import time
@@ -327,8 +328,10 @@ class CoqSerapi():
         """
         from sexpdata import loads
 
+        print(f'{self._sent_history[-4:]=}')
         _local_ctx_and_goals: str = await self.query_goals_completed(opts='(pp ((pp_format PpStr)))')
         _local_ctx_and_goals: list = loads(_local_ctx_and_goals)
+        print(f'{_local_ctx_and_goals=}')
         assert str(_local_ctx_and_goals[0]) == 'ObjList'
         if _local_ctx_and_goals[1] == []:
             return []  # if not in proof mode there is no coq-str obj so return empty list
@@ -398,6 +401,19 @@ class CoqSerapi():
             (Answer 2 Ack)
             (Answer 2 (ObjList ()))
             (Answer 2 Completed)
+
+        case 3: Definitions
+            rlwrap sertop --printer=human
+
+            (Add () "
+            Definition par : Line -> Point -> Line.
+            ")
+
+            (Add () "
+            Definition par : Line -> Point -> Line.
+            ")
+
+        todo: for some reason it's missing \nDefinition par : Line -> Point -> Line.\n
         """
         goals: Union[str, list] = await self.query_local_ctx_and_goals()
         # print(f'-> coq.in_proof_mode() says the goals are: {goals=}')
@@ -881,6 +897,40 @@ async def execute(stmt: str, coq: CoqSerapi) -> Union[str, list]:
 
 
 # - test, examples, tutorials
+
+def fixing_query_goals_lc_refined_coq_stmt_vs_stmt_should_be_same_test():
+    """
+
+    :return:
+    """
+    import os
+    from pycoq.utils import get_coq_serapi
+    from pycoq.common import CoqContext, get_pycoq_context_as_dict
+    from pycoq.opam import opam_executable
+    # -- Args
+    switch: str = 'coq-8.16.0'
+    pwd = '~/iit-term-synthesis/coq_projects/debug_proj',  # only matters I think if we are building the coq proj
+    executable: str = opam_executable('coqc', switch)
+    target_coq_file: str = '~/pycoq/debug_coq_project/definition_test.v'
+    # figure out later how to automate this, getting it from each project, might not be needed...
+    args: list[str] = ["coqc", "-q", "-w", "all", "-Q", ".", "Debug_Proj", target_coq_file.split('/')[-1]]
+    env = dict(os.environ)
+    # - get pycoq context as dict
+    coq_context_dict: dict = get_pycoq_context_as_dict(pwd, executable, target_coq_file, args, env, switch)
+    # --
+    # import data_pkg
+    # #DataPoints = dict[ProofStepID, RawDataPoint]; DataThm = dict[Thm, DataPoints]; DataFile = dict[ThmID, DataThm]
+    # data_f: DataFile = {thm_id, {'t'}}
+    # # coq_ctxt: CoqContext = pycoq.common.load_context(path2filename)
+    # coq_ctxt: CoqContext = CoqContext.from_dict(coq_context_dict)
+    # stmts_in_file: iter[str] = pycoq.split.coq_stmts_of_context(coq_ctxt)
+    # async with get_coq_serapi(coq_ctxt) as coq:
+    #     mode: str = 'init_coq_proj_data_obj'
+    #     await update_data_file_from_coq_file(data_f, stmts_in_file, coq, mode=mode, path2filename=path2filename)
+    # async with get_coq_serapi(coq_ctxt) as coq:
+    #     mode: str = 'hole_refine'
+    #     await update_data_file_from_coq_file(data_f, stmts_in_file, coq, mode=mode, path2filename=path2filename)
+
 
 def playground_sexpdata():
     import sexpdata

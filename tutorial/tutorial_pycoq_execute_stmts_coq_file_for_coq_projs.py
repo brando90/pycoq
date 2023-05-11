@@ -4,7 +4,7 @@ import pycoq
 from pycoq.common import CoqContext
 from pycoq.opam import strace_build_coq_project_and_get_filenames
 from pycoq.project_splits import get_proj_splits_based_on_name_of_path2data, CoqProjs
-from pycoq.serapi import execute
+from pycoq.serapi import execute, CoqExn
 from pycoq.utils import get_coq_serapi
 
 
@@ -18,6 +18,7 @@ def example_execute_coq_files_from_coq_proj_in_pycoq(path2data: str = '~/data/lf
             stmts_in_file: iter[str] = pycoq.split.coq_stmts_of_context(coq_ctxt)
             for stmt_id, stmt in enumerate(stmts_in_file):
                 goals: Union[str, list] = await execute(stmt, coq)
+                proof_term = Union[str, list[CoqExn]] = await coq.get_current_proof_term_via_add()
 
 
 if __name__ == '__main__':
