@@ -66,7 +66,7 @@ setuptools.setup(
                       'strace-parser',
                       'pytest-benchmark',
                       'dataclasses-json',
-                      'numpy'
+                      'numpy',
                       'sexpdata==0.0.4',
                       ],
         entry_points={'console_scripts': ['pycoq-trace=pycoq.pycoq_trace:main']},
