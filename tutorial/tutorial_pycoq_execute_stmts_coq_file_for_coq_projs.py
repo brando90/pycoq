@@ -21,6 +21,8 @@ async def example_execute_coq_files_from_coq_proj_in_pycoq(path2data: str = '~/d
             for stmt_id, stmt in enumerate(stmts_in_file):
                 goals: Union[str, list] = await execute(stmt, coq)
                 proof_term = Union[str, list[CoqExn]] = await coq.get_current_proof_term_via_add()
+                print(f'{goals=}')
+                print(f'{proof_term=}')
 
 
 if __name__ == '__main__':

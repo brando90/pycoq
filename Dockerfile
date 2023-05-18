@@ -55,8 +55,12 @@ RUN eval $(opam env)
 RUN opam repo add coq-released https://coq.inria.fr/opam/released
 # RUN opam pin add -y coq 8.11.0
 # ['opam', 'repo', '--all-switches', 'add', '--set-default', 'coq-released', 'https://coq.inria.fr/opam/released']
+# [NOTE] Repository coq-released has been added to the selections of switch ocaml-variants.4.07.1+flambda_coq-serapi.8.11.0+0.11.1 only.
+#       Run `opam repository add coq-released --all-switches|--set-default' to use it in all existing switches, or in newly created
+#       switches, respectively.
 RUN opam repo --all-switches add --set-default coq-released https://coq.inria.fr/opam/released
 RUN opam update --all
+# # opam pin is good for installing specific version of opam pkgs even if newer are available, so we pin them to make sure they don't change -- while opam install tries to install a version that is compatible with your current opam switch.
 RUN opam pin add -y coq 8.11.0
 
 #RUN opam install -y --switch ocaml-variants.4.07.1+flambda_coq-serapi_coq-serapi_8.11.0+0.11.1 coq-serapi 8.11.0+0.11.1

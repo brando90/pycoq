@@ -13,7 +13,7 @@ from typing import List, Dict, Optional
 from dataclasses import dataclass, field
 
 # from strace_parser.json_transformer import to_json
-from strace_parser.parser import get_parser
+# from strace_parser.parser import get_parser
 
 from pycoq.common import CoqContext, context_fname, dump_context
 

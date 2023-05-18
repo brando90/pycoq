@@ -705,6 +705,9 @@ def strace_build_coq_project_and_get_filenames(coq_proj: CoqProj,
 
     Proberbot example build:
         (iit_synthesis) brando9/afs/cs.stanford.edu/u/brando9/proverbot9001/coq-projects/CompCert $ source make.sh
+
+    ref:
+        - SO Q about removing strace: https://stackoverflow.com/questions/73724074/how-to-call-an-equivalent-command-to-strace-on-mac-ideally-from-python
     """
     logging.info(f'{strace_build_coq_project_and_get_filenames=}')
     logging.info(f'{root_option()=}')

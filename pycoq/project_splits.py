@@ -157,7 +157,7 @@ def get_coqgym_coq_projs(num_current_coqgym_projs: int = 124) -> CoqProjs:
 def get_proj_splits_based_on_name_of_path2data(path2data: Union[Path, str]) -> CoqProjs:
     # expanduser(path2data)
     name_path2data: str = str(path2data)
-    if 'lf_coq_project' in name_path2data:
+    if 'lf_proj' in name_path2data:
         coq_projs: CoqProjs = get_lf_coq_projs()
     elif 'debug_coq_project' in name_path2data:
         # coq_projs: CoqProjs = get_debug_projprojs_meta_data()
