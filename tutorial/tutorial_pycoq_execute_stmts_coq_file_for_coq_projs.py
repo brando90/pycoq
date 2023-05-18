@@ -2,14 +2,16 @@ from typing import Union
 
 import pycoq
 from pycoq.common import CoqContext
-from pycoq.opam import strace_build_coq_project_and_get_filenames
+from pycoq.opam import strace_build_coq_project_and_get_filenames, opam_original_pycoq_pre_setup
 from pycoq.project_splits import get_proj_splits_based_on_name_of_path2data, CoqProjs
 from pycoq.serapi import execute, CoqExn
 from pycoq.utils import get_coq_serapi
 
+import asyncio
 
-def example_execute_coq_files_from_coq_proj_in_pycoq(path2data: str = '~/data/lf_proj/'):
-    coq_proj: CoqProjs = get_proj_splits_based_on_name_of_path2data(path2data)
+
+async def example_execute_coq_files_from_coq_proj_in_pycoq(path2data: str = '~/data/lf_proj/'):
+    coq_proj: CoqProjs = get_proj_splits_based_on_name_of_path2data(path2data).coq_projs[0]
     path2filenames_raw: list[str] = strace_build_coq_project_and_get_filenames(coq_proj, make_clean_coq_proj=True)
     path2filename: str
     for path2filename in path2filenames_raw:
@@ -25,9 +27,12 @@ if __name__ == '__main__':
     import time
 
     start_time = time.time()
+    # print('setup')
+    # opam_original_pycoq_pre_setup('')
+    # print('end')
     # - compile coq proj files in pycoq
-    example_execute_coq_files_from_coq_proj_in_pycoq('~/data/lf_proj/')
-    example_execute_coq_files_from_coq_proj_in_pycoq('~/data/coqgym/')
+    asyncio.run(example_execute_coq_files_from_coq_proj_in_pycoq('~/data/lf_proj/'))
+    # asyncio.run(example_execute_coq_files_from_coq_proj_in_pycoq('~/data/coqgym/'))
 
     # - done
     duration = time.time() - start_time
