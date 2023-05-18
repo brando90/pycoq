@@ -1,4 +1,6 @@
+deprecated in favour of: https://github.com/brando90/ultimate-pycoq
 
+-----
 The pip distribution package pycoq provides two python packages:
 
 - serlib
