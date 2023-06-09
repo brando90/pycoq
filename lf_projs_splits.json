@@ -9,8 +9,7 @@
         "test_files": [
             "Propositions.v",
             "MyList.v",
-            "MyRedBlack.v",
-            "MyTactics.v"
+            "MyRedBlack.v"
         ],
         "switch": "ocaml-variants.4.07.1+flambda_coq-serapi.8.11.0+0.11.1"
     }
