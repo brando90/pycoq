@@ -105,7 +105,7 @@ def list_dict_splits_2_list_splits(coq_projs: list[dict], path_2_coq_projs: Path
 # -- get the config file/meta-data for the coq projects as a Coq Projs object
 
 def get_lf_coq_projs() -> CoqProjs:
-    path_2_coq_projs: Path = Path('~/pycoq/debug_proj_pycoq_lf/').expanduser()
+    path_2_coq_projs: Path = Path('~/pycoq/lf_coq_project/').expanduser()
     path_2_coq_projs_json_splits: Path = Path('~/pycoq/lf_projs_splits.json').expanduser()
     coq_projs: list[dict] = load_json(path_2_coq_projs_json_splits)
     logging.info(f'{coq_projs[0].keys()=}')
