@@ -104,9 +104,23 @@ def list_dict_splits_2_list_splits(coq_projs: list[dict], path_2_coq_projs: Path
 
 # -- get the config file/meta-data for the coq projects as a Coq Projs object
 
-def get_lf_coq_projs() -> CoqProjs:
-    path_2_coq_projs: Path = Path('~/pycoq/lf_coq_project/').expanduser()
-    path_2_coq_projs_json_splits: Path = Path('~/pycoq/lf_projs_splits.json').expanduser()
+def get_lf_coq_projs_simple() -> CoqProjs:
+    path_2_coq_projs: Path = Path('/Users/brandomiranda/pycoq/pycoq_lf_proj_with_simple_test').expanduser()
+    path_2_coq_projs_json_splits: Path = Path(
+        '~/pycoq/lf_projs_splits_simple_extended_with_simple_test.json').expanduser()
+    coq_projs: list[dict] = load_json(path_2_coq_projs_json_splits)
+    logging.info(f'{coq_projs[0].keys()=}')
+    coq_projs: list[CoqProj] = list_dict_splits_2_list_splits(coq_projs, path_2_coq_projs)
+    assert len(coq_projs) == 1
+    coq_projs: CoqProjs = CoqProjs(path_2_coq_projs=path_2_coq_projs,
+                                   path_2_coq_projs_json_splits=path_2_coq_projs_json_splits,
+                                   coq_projs=coq_projs)
+    return coq_projs
+
+def get_lf_coq_projs_extended() -> CoqProjs:
+    path_2_coq_projs: Path = Path('/pycoq_lf_proj_simple_extended_with_list_tree_in_test/').expanduser()
+    path_2_coq_projs_json_splits: Path = Path(
+        '/lf_projs_splits_simple_extended_with_list_tree_in_test.json').expanduser()
     coq_projs: list[dict] = load_json(path_2_coq_projs_json_splits)
     logging.info(f'{coq_projs[0].keys()=}')
     coq_projs: list[CoqProj] = list_dict_splits_2_list_splits(coq_projs, path_2_coq_projs)
@@ -135,21 +149,21 @@ def get_compcert_coq_projs() -> CoqProjs:
     raise NotImplementedError
 
 
-def get_coqgym_coq_projs(num_current_coqgym_projs: int = 124) -> CoqProjs:
-    path_2_coq_projs: Path = Path('~/proverbot9001/coq-projects/').expanduser()
-    print(f'{path_2_coq_projs=}')
-    path_2_coq_projs_json_splits: Path = Path('~/proverbot9001/coqgym_projs_splits.json').expanduser()
-    print(f'{path_2_coq_projs_json_splits=}')
-    coq_projs: list[dict] = load_json(path_2_coq_projs_json_splits)
-    logging.info(f'{coq_projs[0].keys()=}')
-    coq_projs: list[CoqProj] = list_dict_splits_2_list_splits(coq_projs, path_2_coq_projs)
-    assert len(coq_projs) == 124, f'Expected:\n{num_current_coqgym_projs} but got\n{len(coq_projs)=},' \
-                                  f'if you changed this you either need to remove the default value currently being' \
-                                  f'used or update the default value.'
-    coq_projs: CoqProjs = CoqProjs(path_2_coq_projs=path_2_coq_projs,
-                                   path_2_coq_projs_json_splits=path_2_coq_projs_json_splits,
-                                   coq_projs=coq_projs)
-    return coq_projs
+# def get_coqgym_coq_projs(num_current_coqgym_projs: int = 124) -> CoqProjs:
+#     path_2_coq_projs: Path = Path('~/proverbot9001/coq-projects/').expanduser()
+#     print(f'{path_2_coq_projs=}')
+#     path_2_coq_projs_json_splits: Path = Path('~/proverbot9001/coqgym_projs_splits.json').expanduser()
+#     print(f'{path_2_coq_projs_json_splits=}')
+#     coq_projs: list[dict] = load_json(path_2_coq_projs_json_splits)
+#     logging.info(f'{coq_projs[0].keys()=}')
+#     coq_projs: list[CoqProj] = list_dict_splits_2_list_splits(coq_projs, path_2_coq_projs)
+#     assert len(coq_projs) == 124, f'Expected:\n{num_current_coqgym_projs} but got\n{len(coq_projs)=},' \
+#                                   f'if you changed this you either need to remove the default value currently being' \
+#                                   f'used or update the default value.'
+#     coq_projs: CoqProjs = CoqProjs(path_2_coq_projs=path_2_coq_projs,
+#                                    path_2_coq_projs_json_splits=path_2_coq_projs_json_splits,
+#                                    coq_projs=coq_projs)
+#     return coq_projs
 
 
 # --
@@ -157,15 +171,19 @@ def get_coqgym_coq_projs(num_current_coqgym_projs: int = 124) -> CoqProjs:
 def get_proj_splits_based_on_name_of_path2data(path2data: Union[Path, str]) -> CoqProjs:
     # expanduser(path2data)
     name_path2data: str = str(path2data)
-    if 'lf_proj' in name_path2data:
+    if 'pycoq_lf_proj_simple_extended_with_list_tree_in_test' in name_path2data:
         coq_projs: CoqProjs = get_lf_coq_projs()
+    elif 'lf_proj' in name_path2data:
+            coq_projs: CoqProjs = get_lf_coq_projs()
     elif 'debug_coq_project' in name_path2data:
         # coq_projs: CoqProjs = get_debug_projprojs_meta_data()
         raise NotImplementedError
     elif 'compcert' in name_path2data:
-        coq_projs: CoqProjs = get_compcert_coq_projs()
+        # coq_projs: CoqProjs = get_compcert_coq_projs()
+        raise NotImplementedError
     elif 'coqgym' in name_path2data:
-        coq_projs: CoqProjs = get_coqgym_coq_projs()
+        # coq_projs: CoqProjs = get_coqgym_coq_projs()
+        raise NotImplementedError
     else:
         raise ValueError(f'Invalid type of data set/benchmark, got (invalid): {name_path2data=}')
     return coq_projs
