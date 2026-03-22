@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-eval "OPAMSWITCH='coq-8.10'; export OPAMSWITCH;
-OPAM_SWITCH_PREFIX='/lfs/ampere4/0/brando9/.opam/coq-8.10'; export OPAM_SWITCH_PREFIX;
-CAML_LD_LIBRARY_PATH='/lfs/ampere4/0/brando9/.opam/coq-8.10/lib/stublibs:/lfs/ampere4/0/brando9/.opam/coq-8.10/lib/ocaml/stublibs:/lfs/ampere4/0/brando9/.opam/coq-8.10/lib/ocaml'; export CAML_LD_LIBRARY_PATH;
-OCAML_TOPLEVEL_PATH='/lfs/ampere4/0/brando9/.opam/coq-8.10/lib/toplevel'; export OCAML_TOPLEVEL_PATH;
-MANPATH=':/opt/puppetlabs/puppet/share/man:/usr/man:/usr/local/man:/usr/share/man:/usr/kerberos/man:/lfs/ampere4/0/brando9/.opam/coq-8.10/man'; export MANPATH;
-PATH='/lfs/ampere4/0/brando9/.opam/coq-8.10/bin:/lfs/ampere4/0/brando9/.local/bin:/lfs/ampere4/0/brando9/anaconda/bin:/lfs/ampere4/0/brando9/.local/bin:/lfs/ampere4/0/brando9/.ruby-build/bin:/lfs/ampere4/0/brando9/.rbenv/shims:/lfs/ampere4/0/brando9/.rbenv/bin:/usr/local/cuda-11.7/bin:/lfs/ampere4/0/brando9/.local/bin:/lfs/ampere4/0/brando9/anaconda/bin:/lfs/ampere4/0/brando9/.local/bin:/lfs/ampere4/0/brando9/.ruby-build/bin:/lfs/ampere4/0/brando9/.rbenv/shims:/lfs/ampere4/0/brando9/.rbenv/bin:/usr/local/cuda-11.7/bin:/dfs/scratch0/brando9/.ruby-build/bin:/dfs/scratch0/brando9/.rbenv/shims:/dfs/scratch0/brando9/.rbenv/bin:/dfs/scratch0/brando9/.ruby-build/bin:/dfs/scratch0/brando9/.rbenv/shims:/dfs/scratch0/brando9/.rbenv/bin:/dfs/scratch0/brando9/anaconda/envs/iit_synthesis/bin:/dfs/scratch0/brando9/anaconda/condabin:/dfs/scratch0/brando9/anaconda/bin:/dfs/scratch0/brando9/.local/bin:/dfs/scratch0/brando9/.ruby-build/bin:/dfs/scratch0/brando9/.rbenv/shims:/dfs/scratch0/brando9/.rbenv/bin:/usr/local/cuda-11.7/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/afs/cs/software/sbin:/afs/cs/software/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/opt/puppetlabs/bin:/dfs/scratch0/brando9/my_bins:/lfs/ampere4/0/brando9/my_bins:/lfs/ampere4/0/brando9/my_bins'; export PATH;"
-make 
